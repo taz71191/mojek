@@ -1,0 +1,34 @@
+[[source]]
+url = "https://pypi.python.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[packages]
+requests = "*"
+numpy = "*"
+matplotlib = "*"
+streamlit = "*"
+plotly = "*"
+gunicorn = "*"
+sklearn = "*"
+google-cloud-datastore = "*"
+google-cloud-storage = "*"
+fredapi = "*"
+openpyxl = "*"
+spacy = "*"
+pandas = "*"
+filepath = "*"
+tabula-py = "*"
+xeus-python = "*"
+watchdog = "*"
+
+[dev-packages]
+pytest = "*"
+mojek = {editable = true, path = "."}
+jupyterlab = "*"
+
+[requires]
+python_version = "3.8"
+
+[scripts]
+jupyter="jupyter lab"

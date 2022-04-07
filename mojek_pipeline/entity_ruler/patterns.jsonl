@@ -1,0 +1,97 @@
+{"label":"Credit Card Payment","pattern":[{"TEXT":{"REGEX":"amex"}}]}
+{"label":"Equity","pattern":[{"TEXT":{"REGEX":"zerodha"}}]}
+{"label":"Crypto","pattern":[{"TEXT":{"REGEX":"bitcoin"}}]}
+{"label":"Crypto","pattern":[{"TEXT":{"REGEX":"bitc"}}]}
+{"label":"Crypto","pattern":[{"TEXT":{"REGEX":"eth"}}]}
+{"label":"Savings","pattern":[{"TEXT":{"REGEX":"savings"}}]}
+{"label":"Phone","pattern":[{"TEXT":{"REGEX":"jio"}},{"TEXT":{"REGEX":"mobility"}}]}
+{"label":"Phone","pattern":[{"TEXT":{"REGEX":"airtel"}}]}
+{"label":"Phone","pattern":[{"TEXT":{"REGEX":"vodafone"}}]}
+{"label":"Phone","pattern":[{"TEXT":{"REGEX":"idea"}}]}
+{"label":"Household Expenses","pattern":[{"TEXT":{"REGEX":"provisi"}}]}
+{"label":"Household Expenses","pattern":[{"TEXT":{"REGEX":"bharatpe"}}]}
+{"label":"Household Expenses","pattern":[{"TEXT":{"REGEX":"big"}},{"TEXT":{"REGEX":"save"}}]}
+{"label":"Household Expenses","pattern":[{"TEXT":{"REGEX":"for"}},{"TEXT":{"REGEX":"mom"}}]}
+{"label":"Pet","pattern":[{"TEXT":{"REGEX":"pets"}}]}
+{"label":"Pet","pattern":[{"TEXT":{"REGEX":"veterinary"}}]}
+{"label":"General Expenses","pattern":[{"TEXT":{"REGEX":"general"}}]}
+{"label":"General Expenses","pattern":[{"TEXT":{"REGEX":"store"}}]}
+{"label":"General Expenses","pattern":[{"TEXT":{"REGEX":"mummy"}}]}
+{"label":"General Expenses","pattern":[{"TEXT":{"REGEX":"noble"}},{"TEXT":{"REGEX":"chemist"}}]}
+{"label":"Fuel","pattern":[{"TEXT":{"REGEX":"petrol"}}]}
+{"label":"Fuel","pattern":[{"TEXT":{"REGEX":"oil"}}]}
+{"label":"Retail","pattern":[{"TEXT":{"REGEX":"devotie"}}]}
+{"label":"Retail","pattern":[{"TEXT":{"REGEX":"american"}},{"TEXT":{"REGEX":"eagle"}}]}
+{"label":"Retail","pattern":[{"TEXT":{"REGEX":"shoppers"}}]}
+{"label":"Online Shopping","pattern":[{"TEXT":{"REGEX":"amazon"}}]}
+{"label":"Online Shopping","pattern":[{"TEXT":{"REGEX":"flipkart"}}]}
+{"label":"Online Shopping","pattern":[{"TEXT":{"REGEX":"myntra"}}]}
+{"label":"Online Shopping","pattern":[{"TEXT":{"REGEX":"os:"}}]}
+{"label":"Online Shopping","pattern":[{"TEXT":{"REGEX":"zapier"}}]}
+{"label":"Online Shopping","pattern":[{"TEXT":{"REGEX":"aliexpress"}}]}
+{"label":"Online Shopping","pattern":[{"TEXT":{"REGEX":"nyka"}}]}
+{"label":"Streaming","pattern":[{"TEXT":{"REGEX":"zeeentertainment"}}]}
+{"label":"Streaming","pattern":[{"TEXT":{"REGEX":"spotify"}}]}
+{"label":"Streaming","pattern":[{"TEXT":{"REGEX":"facebook"}}]}
+{"label":"Streaming","pattern":[{"TEXT":{"REGEX":"netflix"}}]}
+{"label":"Streaming","pattern":[{"TEXT":{"REGEX":"amazon"}},{"TEXT":{"REGEX":"prime"}}]}
+{"label":"Streaming","pattern":[{"TEXT":{"REGEX":"onlyfans"}}]}
+{"label":"Streaming","pattern":[{"TEXT":{"REGEX":"itunes"}}]}
+{"label":"Streaming","pattern":[{"TEXT":{"REGEX":"hotstar"}}]}
+{"label":"Flight","pattern":[{"TEXT":{"REGEX":"ixigo"}}]}
+{"label":"Flight","pattern":[{"TEXT":{"REGEX":"makemytrip"}}]}
+{"label":"Flight","pattern":[{"TEXT":{"REGEX":"cleartrip"}}]}
+{"label":"Flight","pattern":[{"TEXT":{"REGEX":"ibibo"}}]}
+{"label":"Flight","pattern":[{"TEXT":{"REGEX":"airlines"}}]}
+{"label":"Hotel","pattern":[{"TEXT":{"REGEX":"hotel"}}]}
+{"label":"Hotel","pattern":[{"TEXT":{"REGEX":"booking"}}]}
+{"label":"Hotel","pattern":[{"TEXT":{"REGEX":"oyo"}},{"TEXT":{"REGEX":"rooms"}}]}
+{"label":"Hotel","pattern":[{"TEXT":{"REGEX":"fourseason"}}]}
+{"label":"Local travel","pattern":[{"TEXT":{"REGEX":"bus"}}]}
+{"label":"Local travel","pattern":[{"TEXT":{"REGEX":"uber"}}]}
+{"label":"Local travel","pattern":[{"TEXT":{"REGEX":"metro"}}]}
+{"label":"Local travel","pattern":[{"TEXT":{"REGEX":"ola"}}]}
+{"label":"Restaurants","pattern":[{"TEXT":{"REGEX":"restau"}}]}
+{"label":"Restaurants","pattern":[{"TEXT":{"REGEX":"restaurants"}}]}
+{"label":"Restaurants","pattern":[{"TEXT":{"REGEX":"taste"}},{"TEXT":{"REGEX":"of"}}]}
+{"label":"Restaurants","pattern":[{"TEXT":{"REGEX":"zomato"}}]}
+{"label":"Restaurants","pattern":[{"TEXT":{"REGEX":"swiggy"}}]}
+{"label":"Restaurants","pattern":[{"TEXT":{"REGEX":"caterers"}}]}
+{"label":"Restaurants","pattern":[{"TEXT":{"REGEX":"kitchen"}}]}
+{"label":"Restaurants","pattern":[{"TEXT":{"REGEX":"diner"}}]}
+{"label":"Restaurants","pattern":[{"TEXT":{"REGEX":"dominos"}}]}
+{"label":"Restaurants","pattern":[{"TEXT":{"REGEX":"food"}}]}
+{"label":"Restaurants","pattern":[{"TEXT":{"REGEX":"naryal"}}]}
+{"label":"Restaurants","pattern":[{"TEXT":{"REGEX":"caf\u00e9"}}]}
+{"label":"Restaurants","pattern":[{"TEXT":{"REGEX":"the"}},{"TEXT":{"REGEX":"daily"}}]}
+{"label":"Restaurants","pattern":[{"TEXT":{"REGEX":"smoke"}},{"TEXT":{"REGEX":"house"}},{"TEXT":{"REGEX":"deli"}}]}
+{"label":"Restaurants","pattern":[{"TEXT":{"REGEX":"macdonalds"}}]}
+{"label":"Restaurants","pattern":[{"TEXT":{"REGEX":"burger"}},{"TEXT":{"REGEX":"king"}}]}
+{"label":"Restaurants","pattern":[{"TEXT":{"REGEX":"kfc"}}]}
+{"label":"Restaurants","pattern":[{"TEXT":{"REGEX":"passcode"}}]}
+{"label":"Restaurants","pattern":[{"TEXT":{"REGEX":"panama"}}]}
+{"label":"Restaurants","pattern":[{"TEXT":{"REGEX":"social"}}]}
+{"label":"Restaurants","pattern":[{"TEXT":{"REGEX":"kofuku"}}]}
+{"label":"Restaurants","pattern":[{"TEXT":{"REGEX":"foodhall"}}]}
+{"label":"Restaurants","pattern":[{"TEXT":{"REGEX":"bombay"}},{"TEXT":{"REGEX":"canteen"}}]}
+{"label":"Restaurants","pattern":[{"TEXT":{"REGEX":"hospitali"}}]}
+{"label":"Restaurants","pattern":[{"TEXT":{"REGEX":"drifters"}},{"TEXT":{"REGEX":"brewer"}}]}
+{"label":"Restaurants","pattern":[{"TEXT":{"REGEX":"natural"}},{"TEXT":{"REGEX":"ice"}},{"TEXT":{"REGEX":"crea"}}]}
+{"label":"Restaurants","pattern":[{"TEXT":{"REGEX":"dineout"}}]}
+{"label":"Restaurants","pattern":[{"TEXT":{"REGEX":"dine"}}]}
+{"label":"Restaurants","pattern":[{"TEXT":{"REGEX":"snacks"}}]}
+{"label":"Restaurants","pattern":[{"TEXT":{"REGEX":"coffee"}}]}
+{"label":"Work Expenses","pattern":[{"TEXT":{"REGEX":"mojek"}}]}
+{"label":"Work Expenses","pattern":[{"TEXT":{"REGEX":"freelancer.com"}}]}
+{"label":"Work Expenses","pattern":[{"TEXT":{"REGEX":"neft"}}]}
+{"label":"Work Expenses","pattern":[{"TEXT":{"REGEX":"schbang"}}]}
+{"label":"Work Expenses","pattern":[{"TEXT":{"REGEX":"salary"}}]}
+{"label":"Work Expenses","pattern":[{"TEXT":{"REGEX":"zapier"}}]}
+{"label":"Work Expenses","pattern":[{"TEXT":{"REGEX":"aliexpress"}}]}
+{"label":"Work Expenses","pattern":[{"TEXT":{"REGEX":"instamojo"}}]}
+{"label":"Work Expenses","pattern":[{"TEXT":{"REGEX":"mobikwik"}}]}
+{"label":"Work Expenses","pattern":[{"TEXT":{"REGEX":"omnisend"}}]}
+{"label":"Work Expenses","pattern":[{"TEXT":{"REGEX":"webflow"}}]}
+{"label":"Online News","pattern":[{"TEXT":{"REGEX":"times"}},{"TEXT":{"REGEX":""}}]}
+{"label":"Uber","pattern":[{"TEXT":{"REGEX":"satish"}},{"TEXT":{"REGEX":"babu"}}]}
+{"label":"ATM Withdrawal","pattern":[{"TEXT":{"REGEX":"atw"}}]}
