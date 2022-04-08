@@ -4,14 +4,11 @@ import requests
 import pandas as pd
 import streamlit as st
 
-
 nlp = spacy.load("./mojek_pipeline")
-
 
 google_api_key = 'AIzaSyAEclAraZx1QXVEY_rpV_2v_Vca9A_-rYI'
 
 search_engine_id = '7351b00a1bb194df8'
-
 
 
 def extract_google_query(nlp, narration):
