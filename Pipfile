@@ -15,6 +15,7 @@ openpyxl = "*"
 spacy = "*"
 pandas = "*"
 watchdog = "*"
+shillelagh = "*"
 
 [dev-packages]
 pytest = "*"
@@ -22,7 +23,7 @@ mojek = {editable = true, path = "."}
 jupyterlab = "*"
 
 [requires]
-python_version = "3.8"
+python_version = "3.9"
 
 [scripts]
 jupyter="jupyter lab"
