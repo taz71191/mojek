@@ -27,7 +27,7 @@ def save_to_google(user_name, user_age, user_occupation, narration, keyword, use
     conn.commit()
     st.session_state.narration = ""
 
-def extract_google_query(nlp, narration):
+def extract_google_query(nlp, narration, google_api_key=google_api_key, search_engine_id=search_engine_id):
     query = narration
     remov_pcd = r'[^PCD/]' #Personal Certificate of Deposit
     pattern = r'[0-9:/]'

@@ -16,6 +16,7 @@ spacy = "*"
 pandas = "*"
 watchdog = "*"
 shillelagh = "*"
+flask = "*"
 
 [dev-packages]
 pytest = "*"
