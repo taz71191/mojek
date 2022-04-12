@@ -1,16 +1,17 @@
 import pandas as pd
 import glob
 import spacy
-import en_core_web_sm
 from spacy.matcher import Matcher
 from spacy.tokens import Span
 import re
 import requests
-from labels import labels
+from mojek.labels import labels
+from mojek.config import *
 NoneType = type(None)
 
-nlp = spacy.load("en_core_web_sm")
-matcher = Matcher(nlp.vocab)
+
+# nlp = spacy.load("en_core_web_sm")
+# matcher = Matcher(nlp.vocab)
 
 def add_event_ent(matcher, doc, i, matches):
     # Get the current match and create tuple of entity label, start and end.
