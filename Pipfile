@@ -17,6 +17,7 @@ pandas = "*"
 watchdog = "*"
 shillelagh = "*"
 flask = "*"
+gunicorn = "*"
 
 [dev-packages]
 pytest = "*"
