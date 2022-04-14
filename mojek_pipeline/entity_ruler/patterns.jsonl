@@ -2,7 +2,6 @@
 {"label":"Equity","pattern":[{"TEXT":{"REGEX":"zerodha"}}]}
 {"label":"Crypto","pattern":[{"TEXT":{"REGEX":"bitcoin"}}]}
 {"label":"Crypto","pattern":[{"TEXT":{"REGEX":"bitc"}}]}
-{"label":"Crypto","pattern":[{"TEXT":{"REGEX":"eth"}}]}
 {"label":"Savings","pattern":[{"TEXT":{"REGEX":"savings"}}]}
 {"label":"Phone","pattern":[{"TEXT":{"REGEX":"jio"}},{"TEXT":{"REGEX":"mobility"}}]}
 {"label":"Phone","pattern":[{"TEXT":{"REGEX":"airtel"}}]}
