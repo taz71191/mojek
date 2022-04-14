@@ -174,6 +174,7 @@ def extract_google_query(nlp, narration, google_api_key=google_api_key, search_e
                         return {"label": ents.label_, "from_google": True, "snippet": snippet, "keyword": keyword}
             else:
                 continue
+            return {"label": 'No match', "from_google": True, "snippet": "", "keyword": ""}
     else:
         {"label": 'No match', "from_google": True, "snippet": "", "keyword": ""}
 
