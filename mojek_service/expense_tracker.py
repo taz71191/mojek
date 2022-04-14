@@ -164,27 +164,32 @@ def extract_google_query(nlp, narration, google_api_key=google_api_key, search_e
             snippet = item['snippet']
             doc1 = nlp(snippet.lower())
             if (len(doc1.ents) >= 1) & (type(doc1.ents) != NoneType):
-                if doc1.ents[0].label_ not in labels:
-                    continue
-                else:
-                    # st.write(doc1)
-                    return doc1.ents[0].label_
+                for ents in doc1.ents:
+                    if ents.label_ not in labels:
+                        continue
+                    else:
+                        # st.write(doc1)
+                        keyword = [t.text for t in ents]
+                        keyword = ' '.join(keyword)
+                        return {"label": ents.label_, "from_google": True, "snippet": snippet, "keyword": keyword}
             else:
                 continue
     else:
-        'No match'
+        {"label": 'No match', "from_google": True, "snippet": "", "keyword": ""}
 
 def expense_tracker(nlp, narration, labels, google_api_key, search_engine_id):
     doc1 = nlp(narration.lower())
     if len(doc1.ents) >= 1:
         for doc in doc1.ents:
             label = doc.label_
+            keyword = [t.text for t in doc]
+            keyword = ' '.join(keyword)
             if label in labels:
-                return label
+                return {"label": label, "from_google": False, "snippet": "", "keyword": keyword}
             else:
                 continue
-        label = extract_google_query(nlp, narration, google_api_key, search_engine_id)
-        return label
+        response = extract_google_query(nlp, narration, google_api_key, search_engine_id)
+        return response
     else:
         label = extract_google_query(nlp, narration, google_api_key, search_engine_id)
         return label

@@ -15,11 +15,14 @@ nlp = spacy.load("./mojek_pipeline")
 
 app = Flask(__name__)
 
+@app.route("/")
+def hello():
+    return "Hello, send me your expense using https://enigmatic-plateau-09140.herokuapp.com/expense-tracker?narration={narration}"
+
 @app.route("/expense-tracker", methods=['GET'])
 def get_expense_category():
     if request.method == 'GET':
-        narration = request.args.get('input', None)
-        print("Printing secrets:", google_api_key, search_engine_id)
-        label = expense_tracker(nlp, narration, labels, google_api_key, search_engine_id)
-        response = {"label": label}
+        narration = request.args.get('narration', None)
+        response = expense_tracker(nlp, narration, labels, google_api_key, search_engine_id)
+        response["narration"] = narration
         return response
