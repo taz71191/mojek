@@ -21,7 +21,7 @@ gunicorn = "*"
 
 [dev-packages]
 pytest = "*"
-mojek = {editable = true, path = "."}
+mojek_service = {editable = true, path = "."}
 jupyterlab = "*"
 
 [requires]

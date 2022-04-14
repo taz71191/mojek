@@ -5,8 +5,8 @@ from spacy.matcher import Matcher
 from spacy.tokens import Span
 import re
 import requests
-from mojek.labels import labels
-from mojek.config import *
+from mojek_service.labels import labels
+from mojek_service.config import *
 NoneType = type(None)
 
 
@@ -155,6 +155,8 @@ def extract_google_query(nlp, narration, google_api_key=google_api_key, search_e
     start = (page - 1) * 10 + 1
     url = f"https://www.googleapis.com/customsearch/v1?key={google_api_key}&cx={search_engine_id}&q={mod_string}&start={start}"
     data = requests.get(url).json()
+    if 'error' in data.keys():
+        return "Error: Can't connect to Google Search API"
     if 'items' in data.keys():
         for item in data['items']:
             if 'snippet' not in item.keys():
@@ -181,8 +183,8 @@ def expense_tracker(nlp, narration, labels, google_api_key, search_engine_id):
                 return label
             else:
                 continue
-    
         label = extract_google_query(nlp, narration, google_api_key, search_engine_id)
         return label
     else:
-        return 'No match'
+        label = extract_google_query(nlp, narration, google_api_key, search_engine_id)
+        return label
