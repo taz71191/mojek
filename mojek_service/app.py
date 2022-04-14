@@ -19,6 +19,7 @@ app = Flask(__name__)
 def get_expense_category():
     if request.method == 'GET':
         narration = request.args.get('input', None)
+        print("Printing secrets:", google_api_key, search_engine_id)
         label = expense_tracker(nlp, narration, labels, google_api_key, search_engine_id)
         response = {"label": label}
         return response
