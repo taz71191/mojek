@@ -1,4 +1,4 @@
-from mojek_service.expense_tracker import expense_tracker
+from mojek_service.expense_tracker import expense_tracker, update_gsheet
 from mojek_service.config import *
 from flask import Flask
 from flask import request
@@ -19,10 +19,15 @@ app = Flask(__name__)
 def hello():
     return "Hello, send me your expense using https://enigmatic-plateau-09140.herokuapp.com/expense-tracker?narration={narration}"
 
-@app.route("/expense-tracker", methods=['GET'])
+@app.route("/expense-tracker", methods=['GET', 'POST'])
 def get_expense_category():
     if request.method == 'GET':
         narration = request.args.get('narration', None)
         response = expense_tracker(nlp, narration, labels, google_api_key, search_engine_id)
         response["narration"] = narration
+        return response
+    elif request.method == 'POST':
+        request_data = request.get_json()
+        print("This is the request", request_data)
+        response = update_gsheet(request_data)
         return response

@@ -7,6 +7,13 @@ import re
 import requests
 from mojek_service.labels import labels
 from mojek_service.config import *
+from google.oauth2 import service_account
+from shillelagh.backends.apsw.db import connect
+from shillelagh.backends.apsw.dialects.gsheets import APSWGSheetsDialect
+from sqlalchemy.engine import create_engine
+import os
+import json
+
 NoneType = type(None)
 
 
@@ -194,3 +201,38 @@ def expense_tracker(nlp, narration, labels, google_api_key, search_engine_id):
     else:
         label = extract_google_query(nlp, narration, google_api_key, search_engine_id)
         return label
+
+def check_payload(payload):
+    must_have_keys = ['user_name', 'user_age', 'user_occupation','narration','user_defined_keyword', 'user_defined_label', 'algo_label', 'from_google','algo_keyword','snippet']
+    for key in must_have_keys:
+        if key not in payload.keys():
+            return {"error": f"Missing key {key}"}
+    return {"error" : None}
+
+def update_gsheet(payload):
+    check_payload_dict = check_payload(payload)
+    if check_payload_dict["error"] == None:
+        gcp_service_account = json.loads(os.getenv("gcp_service_account"))
+        conn = connect(":memory:", adapter_kwargs={"gsheetsapi": {"service_account_info": gcp_service_account}})
+        cursor = conn.cursor()
+        engine = create_engine("gsheets://")
+        user_name = payload["user_name"]
+        user_age = payload["user_age"]
+        user_occupation = payload["user_occupation"]
+        narration = payload["narration"]
+        user_defined_keyword = payload["user_defined_keyword"]
+        user_defined_label = payload["user_defined_label"]
+        algo_label = payload["algo_label"]
+        from_google = payload["from_google"]
+        algo_keyword = payload["algo_keyword"]
+        snippet = payload["snippet"]
+        query = f"""INSERT INTO '{private_g_sheet_url}' 
+            (user_name, user_age, user_occupation, narration, user_defined_keyword, user_defined_label, algo_label, from_google, algo_keyword, snippet)
+            VALUES ('{user_name}', '{user_age}', '{user_occupation}', '{narration}', '{user_defined_keyword}','{user_defined_label}', '{algo_label}', '{from_google}', '{algo_keyword}','{snippet}')
+            """
+        print(query)
+        cursor.execute(query)
+        conn.commit()
+        return check_payload_dict
+    else:
+        return check_payload_dict
