@@ -223,14 +223,17 @@ def update_gsheet(payload):
         user_defined_keyword = payload["user_defined_keyword"]
         user_defined_label = payload["user_defined_label"]
         algo_label = payload["algo_label"]
-        from_google = payload["from_google"]
+        from_google = bool(payload["from_google"])
+        if from_google:
+            from_google = '1'
+        else:
+            from_google = '0'
         algo_keyword = payload["algo_keyword"]
         snippet = payload["snippet"]
         query = f"""INSERT INTO '{private_g_sheet_url}' 
             (user_name, user_age, user_occupation, narration, user_defined_keyword, user_defined_label, algo_label, from_google, algo_keyword, snippet)
             VALUES ('{user_name}', '{user_age}', '{user_occupation}', '{narration}', '{user_defined_keyword}','{user_defined_label}', '{algo_label}', '{from_google}', '{algo_keyword}','{snippet}')
             """
-        print(query)
         cursor.execute(query)
         conn.commit()
         return check_payload_dict
