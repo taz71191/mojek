@@ -24,6 +24,7 @@ POST
 payload = {
     "user_name": "",
     "user_email": "",
+    "user_age": "",
     "user_occupation": "",
     "narration": "PCD/SPOTIFY/XXXXX",
     "user_defined_keyword": "spotify",
