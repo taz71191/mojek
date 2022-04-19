@@ -19,6 +19,7 @@ shillelagh = "*"
 flask = "*"
 gunicorn = "*"
 python-dotenv = "*"
+flask-cors = "*"
 
 [dev-packages]
 pytest = "*"

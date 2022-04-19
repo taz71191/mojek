@@ -2,6 +2,7 @@ from mojek_service.expense_tracker import expense_tracker, update_gsheet
 from mojek_service.config import *
 from flask import Flask
 from flask import request
+from flask_cors import CORS
 from mojek_service.labels import labels
 from mojek_service.config import *
 from multiprocessing import Process
@@ -14,6 +15,7 @@ import spacy
 nlp = spacy.load("./mojek_pipeline")
 
 app = Flask(__name__)
+cors = CORS(app)
 
 @app.route("/")
 def hello():
