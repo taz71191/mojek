@@ -11,8 +11,8 @@
 {"label":"Household Expenses","pattern":[{"TEXT":{"REGEX":"bharatpe"}}]}
 {"label":"Household Expenses","pattern":[{"TEXT":{"REGEX":"big"}},{"TEXT":{"REGEX":"save"}}]}
 {"label":"Household Expenses","pattern":[{"TEXT":{"REGEX":"for"}},{"TEXT":{"REGEX":"mom"}}]}
-{"label":"Pet","pattern":[{"TEXT":{"REGEX":"pets"}}]}
-{"label":"Pet","pattern":[{"TEXT":{"REGEX":"veterinary"}}]}
+{"label":"Pet Expense","pattern":[{"TEXT":{"REGEX":"pets"}}]}
+{"label":"Pet Expense","pattern":[{"TEXT":{"REGEX":"veterinary"}}]}
 {"label":"General Expenses","pattern":[{"TEXT":{"REGEX":"general"}}]}
 {"label":"General Expenses","pattern":[{"TEXT":{"REGEX":"store"}}]}
 {"label":"General Expenses","pattern":[{"TEXT":{"REGEX":"mummy"}}]}
@@ -37,19 +37,22 @@
 {"label":"Streaming","pattern":[{"TEXT":{"REGEX":"onlyfans"}}]}
 {"label":"Streaming","pattern":[{"TEXT":{"REGEX":"itunes"}}]}
 {"label":"Streaming","pattern":[{"TEXT":{"REGEX":"hotstar"}}]}
-{"label":"Flight","pattern":[{"TEXT":{"REGEX":"ixigo"}}]}
-{"label":"Flight","pattern":[{"TEXT":{"REGEX":"makemytrip"}}]}
-{"label":"Flight","pattern":[{"TEXT":{"REGEX":"cleartrip"}}]}
-{"label":"Flight","pattern":[{"TEXT":{"REGEX":"ibibo"}}]}
-{"label":"Flight","pattern":[{"TEXT":{"REGEX":"airlines"}}]}
+{"label":"Air Travel","pattern":[{"TEXT":{"REGEX":"ixigo"}}]}
+{"label":"Air Travel","pattern":[{"TEXT":{"REGEX":"makemytrip"}}]}
+{"label":"Air Travel","pattern":[{"TEXT":{"REGEX":"cleartrip"}}]}
+{"label":"Air Travel","pattern":[{"TEXT":{"REGEX":"ibibo"}}]}
+{"label":"Air Travel","pattern":[{"TEXT":{"REGEX":"airlines"}}]}
 {"label":"Hotel","pattern":[{"TEXT":{"REGEX":"hotel"}}]}
 {"label":"Hotel","pattern":[{"TEXT":{"REGEX":"booking"}}]}
 {"label":"Hotel","pattern":[{"TEXT":{"REGEX":"oyo"}},{"TEXT":{"REGEX":"rooms"}}]}
 {"label":"Hotel","pattern":[{"TEXT":{"REGEX":"fourseason"}}]}
 {"label":"Local travel","pattern":[{"TEXT":{"REGEX":"bus"}}]}
-{"label":"Local travel","pattern":[{"TEXT":{"REGEX":"uber"}}]}
+{"label":"Ride Share","pattern":[{"TEXT":{"REGEX":"uber"}}]}
+{"label":"Ride Share","pattern":[{"TEXT":{"REGEX":"lyft"}}]}
+{"label":"Ride Share","pattern":[{"TEXT":{"REGEX":"commute"}}]}
 {"label":"Local travel","pattern":[{"TEXT":{"REGEX":"metro"}}]}
-{"label":"Local travel","pattern":[{"TEXT":{"REGEX":"ola"}}]}
+{"label":"Ride Share","pattern":[{"TEXT":{"REGEX":"ola"}}]}
+{"label":"Ride Share","pattern":[{"TEXT":{"REGEX":"taxi"}}]}
 {"label":"Restaurants","pattern":[{"TEXT":{"REGEX":"restau"}}]}
 {"label":"Restaurants","pattern":[{"TEXT":{"REGEX":"restaurants"}}]}
 {"label":"Restaurants","pattern":[{"TEXT":{"REGEX":"taste"}},{"TEXT":{"REGEX":"of"}}]}
@@ -61,7 +64,7 @@
 {"label":"Restaurants","pattern":[{"TEXT":{"REGEX":"dominos"}}]}
 {"label":"Restaurants","pattern":[{"TEXT":{"REGEX":"food"}}]}
 {"label":"Restaurants","pattern":[{"TEXT":{"REGEX":"naryal"}}]}
-{"label":"Restaurants","pattern":[{"TEXT":{"REGEX":"caf\u00e9"}}]}
+{"label":"Coffee Shops","pattern":[{"TEXT":{"REGEX":"caf\u00e9"}}]}
 {"label":"Restaurants","pattern":[{"TEXT":{"REGEX":"the"}},{"TEXT":{"REGEX":"daily"}}]}
 {"label":"Restaurants","pattern":[{"TEXT":{"REGEX":"smoke"}},{"TEXT":{"REGEX":"house"}},{"TEXT":{"REGEX":"deli"}}]}
 {"label":"Restaurants","pattern":[{"TEXT":{"REGEX":"macdonalds"}}]}
@@ -94,3 +97,64 @@
 {"label":"Online News","pattern":[{"TEXT":{"REGEX":"times"}},{"TEXT":{"REGEX":""}}]}
 {"label":"Uber","pattern":[{"TEXT":{"REGEX":"satish"}},{"TEXT":{"REGEX":"babu"}}]}
 {"label":"ATM Withdrawal","pattern":[{"TEXT":{"REGEX":"atw"}}]}
+{"label":"Clothing","pattern":[{"TEXT":{"REGEX":"retail"}}]}
+{"label":"Clothing","pattern":[{"TEXT":{"REGEX":"jeans"}}]}
+{"label":"Clothing","pattern":[{"TEXT":{"REGEX":"hoodies"}}]}
+{"label":"Clothing","pattern":[{"TEXT":{"REGEX":"tops"}}]}
+{"label":"Clothing","pattern":[{"TEXT":{"REGEX":"jackets"}}]}
+{"label":"Clothing","pattern":[{"TEXT":{"REGEX":"clothing"}}]}
+{"label":"Clothing","pattern":[{"TEXT":{"REGEX":"basics"}}]}
+{"label":"Clothing","pattern":[{"TEXT":{"REGEX":"outfits"}}]}
+{"label":"Clothing","pattern":[{"TEXT":{"REGEX":"enthnic"}}, {"TEXT":{"REGEX":"outfits"}}]}
+{"label":"Clothing","pattern":[{"TEXT":{"REGEX":"kurtas"}}]}
+{"label":"Clothing","pattern":[{"TEXT":{"REGEX":"sherwanis"}}]}
+{"label":"Clothing","pattern":[{"TEXT":{"REGEX":"indo-westerns"}}]}
+{"label":"Clothing","pattern":[{"TEXT":{"REGEX":"sarees"}}]}
+{"label":"Clothing","pattern":[{"TEXT":{"REGEX":"lehengas"}}]}
+{"label":"Tuition","pattern":[{"TEXT":{"REGEX":"development"}}]}
+{"label":"Tuition","pattern":[{"TEXT":{"REGEX":"universities"}}]}
+{"label":"Tuition","pattern":[{"TEXT":{"REGEX":"university"}}]}
+{"label":"Tuition","pattern":[{"TEXT":{"REGEX":"certificate"}}]}
+{"label":"Tuition","pattern":[{"TEXT":{"REGEX":"degrees"}}]}
+{"label":"Tuition","pattern":[{"TEXT":{"REGEX":"certificate"}}, {"TEXT":{"REGEX":"programs"}}]}
+{"label":"Tuition","pattern":[{"TEXT":{"REGEX":"learning"}}]}
+{"label":"Tuition","pattern":[{"TEXT":{"REGEX":"learn"}}]}
+{"label":"Hotel","pattern":[{"TEXT":{"REGEX":"resorts"}}]}
+{"label":"Shipping","pattern":[{"TEXT":{"REGEX":"ship"}}]}
+{"label":"Shipping","pattern":[{"TEXT":{"REGEX":"shipments"}}]}
+{"label":"Shipping","pattern":[{"TEXT":{"REGEX":"logistics"}}]}
+{"label":"Pharmacy","pattern":[{"TEXT":{"REGEX":"pharmacy"}}]}
+{"label":"Pharmacy","pattern":[{"TEXT":{"REGEX":"chemist"}}]}
+{"label":"Health & Fitness","pattern":[{"TEXT":{"REGEX":"strength"}}, {"TEXT":{"REGEX":"training"}}]}
+{"label":"Health & Fitness","pattern":[{"TEXT":{"REGEX":"weight"}}, {"TEXT":{"REGEX":"training"}}]}
+{"label":"Health & Fitness","pattern":[{"TEXT":{"REGEX":"gym"}}]}
+{"label":"Health & Fitness","pattern":[{"TEXT":{"REGEX":"spa"}}]}
+{"label":"Health & Fitness","pattern":[{"TEXT":{"REGEX":"massages"}}]}
+{"label":"Health & Fitness","pattern":[{"TEXT":{"REGEX":"holistic"}}, {"TEXT":{"REGEX":"healing"}}]}
+{"label":"Groceries","pattern":[{"TEXT":{"REGEX":"fresh"}}]}
+{"label":"Groceries","pattern":[{"TEXT":{"REGEX":"grocery"}}]}
+{"label":"Groceries","pattern":[{"TEXT":{"REGEX":"vegetable"}}]}
+{"label":"Groceries","pattern":[{"TEXT":{"REGEX":"butcher"}}]}
+{"label":"Groceries","pattern":[{"TEXT":{"REGEX":"meat"}}]}
+{"label":"Groceries","pattern":[{"TEXT":{"REGEX":"fruit"}}]}
+{"label":"Coffee Shops","pattern":[{"TEXT":{"REGEX":"coffee"}}]}
+{"label":"Coffee Shops","pattern":[{"TEXT":{"REGEX":"coffees"}}]}
+{"label":"Coffee Shops","pattern":[{"TEXT":{"REGEX":"roasters"}}]}
+{"label":"Coffee Shops","pattern":[{"TEXT":{"REGEX":"espresso"}}]}
+{"label":"Coffee Shops","pattern":[{"TEXT":{"REGEX":"barista"}}]}
+{"label":"Bills & Utilities","pattern":[{"TEXT":{"REGEX":"telecom"}}]}
+{"label":"Bills & Utilities","pattern":[{"TEXT":{"REGEX":"postpaid"}}]}
+{"label":"Bills & Utilities","pattern":[{"TEXT":{"REGEX":"broadband"}}]}
+{"label":"Bills & Utilities","pattern":[{"TEXT":{"REGEX":"recharge"}}]}
+{"label":"Bills & Utilities","pattern":[{"TEXT":{"REGEX":"power"}}, {"TEXT":{"REGEX":"generation"}}]}
+{"label":"Bills & Utilities","pattern":[{"TEXT":{"REGEX":"energy"}}]}
+{"label":"Amusement","pattern":[{"TEXT":{"REGEX":"play"}}]}
+{"label":"Amusement","pattern":[{"TEXT":{"REGEX":"fun "}}]}
+{"label":"Amusement","pattern":[{"TEXT":{"REGEX":"friends"}}]}
+{"label":"Alcohol & Bars","pattern":[{"TEXT":{"REGEX":"bar "}}]}
+{"label":"Alcohol & Bars","pattern":[{"TEXT":{"REGEX":"drinks"}}]}
+{"label":"Alcohol & Bars","pattern":[{"TEXT":{"REGEX":"alcohol"}}]}
+{"label":"Air Travel","pattern":[{"TEXT":{"REGEX":"flights"}}]}
+{"label":"Air Travel","pattern":[{"TEXT":{"REGEX":"international"}}]}
+{"label":"Air Travel","pattern":[{"TEXT":{"REGEX":"destinations"}}]}
+{"label":"Air Travel","pattern":[{"TEXT":{"REGEX":"world"}}, {"TEXT":{"REGEX":"wide"}}]}
