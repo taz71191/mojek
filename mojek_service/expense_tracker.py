@@ -144,6 +144,20 @@ def return_label(matcher, narration, nlp, debug=False):
     else:
         return "No match"
 
+def google_search_snippet(narration, google_api_key=google_api_key, search_engine_id=search_engine_id):
+    page = 1
+    start = (page - 1) * 10 + 1
+    url = f"https://www.googleapis.com/customsearch/v1?key={google_api_key}&cx={search_engine_id}&q={narration}&start={start}"
+    data = requests.get(url).json()
+    if 'error' in data.keys():
+        return "Error: Can't connect to Google Search API"
+    if 'items' in data.keys():
+        for item in data['items']:
+            if 'snippet' not in item.keys():
+                continue
+            snippet = item['snippet']
+    return snippet
+
 def extract_google_query(nlp, narration, google_api_key=google_api_key, search_engine_id=search_engine_id):
     query = narration
     remov_pcd = r'[^PCD/]' #Personal Certificate of Deposit
