@@ -8,7 +8,6 @@
 {"label":"Phone","pattern":[{"TEXT":{"REGEX":"vodafone"}}]}
 {"label":"Phone","pattern":[{"TEXT":{"REGEX":"idea"}}]}
 {"label":"Household Expenses","pattern":[{"TEXT":{"REGEX":"provisi"}}]}
-{"label":"Household Expenses","pattern":[{"TEXT":{"REGEX":"bharatpe"}}]}
 {"label":"Household Expenses","pattern":[{"TEXT":{"REGEX":"big"}},{"TEXT":{"REGEX":"save"}}]}
 {"label":"Household Expenses","pattern":[{"TEXT":{"REGEX":"for"}},{"TEXT":{"REGEX":"mom"}}]}
 {"label":"Pet Expense","pattern":[{"TEXT":{"REGEX":"pets"}}]}
@@ -22,6 +21,8 @@
 {"label":"Retail","pattern":[{"TEXT":{"REGEX":"devotie"}}]}
 {"label":"Retail","pattern":[{"TEXT":{"REGEX":"american"}},{"TEXT":{"REGEX":"eagle"}}]}
 {"label":"Retail","pattern":[{"TEXT":{"REGEX":"shoppers"}}]}
+{"label":"Bills & Utilities","pattern":[{"TEXT":{"REGEX":"amazon"}},{"TEXT":{"REGEX":"pay"}}]}
+{"label":"Bills & Utilities","pattern":[{"TEXT":{"REGEX":"google"}},{"TEXT":{"REGEX":"pay"}}]}
 {"label":"Online Shopping","pattern":[{"TEXT":{"REGEX":"amazon"}}]}
 {"label":"Online Shopping","pattern":[{"TEXT":{"REGEX":"flipkart"}}]}
 {"label":"Online Shopping","pattern":[{"TEXT":{"REGEX":"myntra"}}]}
@@ -37,11 +38,11 @@
 {"label":"Streaming","pattern":[{"TEXT":{"REGEX":"onlyfans"}}]}
 {"label":"Streaming","pattern":[{"TEXT":{"REGEX":"itunes"}}]}
 {"label":"Streaming","pattern":[{"TEXT":{"REGEX":"hotstar"}}]}
-{"label":"Air Travel","pattern":[{"TEXT":{"REGEX":"ixigo"}}]}
-{"label":"Air Travel","pattern":[{"TEXT":{"REGEX":"makemytrip"}}]}
-{"label":"Air Travel","pattern":[{"TEXT":{"REGEX":"cleartrip"}}]}
-{"label":"Air Travel","pattern":[{"TEXT":{"REGEX":"ibibo"}}]}
-{"label":"Air Travel","pattern":[{"TEXT":{"REGEX":"airlines"}}]}
+{"label":"Travel","pattern":[{"TEXT":{"REGEX":"ixigo"}}]}
+{"label":"Travel","pattern":[{"TEXT":{"REGEX":"makemytrip"}}]}
+{"label":"Travel","pattern":[{"TEXT":{"REGEX":"cleartrip"}}]}
+{"label":"Travel","pattern":[{"TEXT":{"REGEX":"ibibo"}}]}
+{"label":"Travel","pattern":[{"TEXT":{"REGEX":"airlines"}}]}
 {"label":"Hotel","pattern":[{"TEXT":{"REGEX":"hotel"}}]}
 {"label":"Hotel","pattern":[{"TEXT":{"REGEX":"booking"}}]}
 {"label":"Hotel","pattern":[{"TEXT":{"REGEX":"oyo"}},{"TEXT":{"REGEX":"rooms"}}]}
@@ -85,7 +86,6 @@
 {"label":"Restaurants","pattern":[{"TEXT":{"REGEX":"coffee"}}]}
 {"label":"Work Expenses","pattern":[{"TEXT":{"REGEX":"mojek"}}]}
 {"label":"Work Expenses","pattern":[{"TEXT":{"REGEX":"freelancer.com"}}]}
-{"label":"Work Expenses","pattern":[{"TEXT":{"REGEX":"neft"}}]}
 {"label":"Work Expenses","pattern":[{"TEXT":{"REGEX":"schbang"}}]}
 {"label":"Work Expenses","pattern":[{"TEXT":{"REGEX":"salary"}}]}
 {"label":"Work Expenses","pattern":[{"TEXT":{"REGEX":"zapier"}}]}
@@ -154,7 +154,7 @@
 {"label":"Alcohol & Bars","pattern":[{"TEXT":{"REGEX":"bar "}}]}
 {"label":"Alcohol & Bars","pattern":[{"TEXT":{"REGEX":"drinks"}}]}
 {"label":"Alcohol & Bars","pattern":[{"TEXT":{"REGEX":"alcohol"}}]}
-{"label":"Air Travel","pattern":[{"TEXT":{"REGEX":"flights"}}]}
-{"label":"Air Travel","pattern":[{"TEXT":{"REGEX":"international"}}]}
-{"label":"Air Travel","pattern":[{"TEXT":{"REGEX":"destinations"}}]}
-{"label":"Air Travel","pattern":[{"TEXT":{"REGEX":"world"}}, {"TEXT":{"REGEX":"wide"}}]}
+{"label":"Travel","pattern":[{"TEXT":{"REGEX":"flights"}}]}
+{"label":"Travel","pattern":[{"TEXT":{"REGEX":"international"}}]}
+{"label":"Travel","pattern":[{"TEXT":{"REGEX":"destinations"}}]}
+{"label":"Travel","pattern":[{"TEXT":{"REGEX":"world"}}, {"TEXT":{"REGEX":"wide"}}]}
