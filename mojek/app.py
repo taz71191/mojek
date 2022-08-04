@@ -55,4 +55,5 @@ def parse_bank_statement():
         data = request.get_json()
         print(data)
         response = {"status": 200}
+        return reponse
 
