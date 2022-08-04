@@ -43,15 +43,16 @@ def parse_bank_statement():
         user_id = request.args.get('user_id', None)
         institution_name = request.args.get('institution_name', None)
         file_type = request.args.get('file_type', None)
-        blob = request.args.get('blob', None)
+        blob = request.args.get('body', None)
         print(blob)
         response = {"status": 200}
         return response
     elif request.method == 'POST':
-        user_id = request.args.get('user_id', None)
-        institution_name = request.args.get('institution_name', None)
-        file_type = request.args.get('file_type', None)
-        blob = request.args.get('blob', None)
-        print(blob)
+        # user_id = request.args.get('user_id', None)
+        # institution_name = request.args.get('institution_name', None)
+        # file_type = request.args.get('file_type', None)
+        # blob = request.args.get('body', None)
+        data = request.get_json()
+        print(data)
         response = {"status": 200}
 
