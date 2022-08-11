@@ -1,13 +1,14 @@
-from mojek_service.expense_tracker import expense_tracker, update_gsheet
+from mojek_service.expense_tracker import expense_tracker, update_gsheet, bulk_expense_tracker
 from mojek_service.config import *
 from flask import Flask
 from flask import request
 from flask_cors import CORS
 from mojek_service.labels import labels
 from mojek_service.config import *
-from multiprocessing import Process
+from mojek_service.parse_statements import parse_statement
 import os
 import spacy
+import json
 
 # https://dev.to/techparida/how-to-deploy-a-flask-app-on-heroku-heb
 # https://stackoverflow.com/questions/57922676/exposing-an-endpoint-for-a-python-program
@@ -39,19 +40,34 @@ def get_expense_category():
 @app.route("/upload-statement", methods=['GET', 'POST'])
 def parse_bank_statement():
     if request.method == 'GET':
+        job_id = request.args.get('job_id', None)
         user_id = request.args.get('user_id', None)
         institution_name = request.args.get('institution_name', None)
         file_type = request.args.get('file_type', None)
-        blob = request.args.get('body', None)
-        print(blob)
-        response = {"status": 200}
-        return response
+        bank_statement = request.args.get('bank_statement', None)
+        doc = parse_statement(institution_name, file_type, bank_statement)
+        if bool(doc):
+            doc_w_category = bulk_expense_tracker(doc, nlp, narration, labels, google_api_key, search_engine_id)
+            response = {
+                "status": 200,
+                "job_id": job_id, 
+                "user_id": user_id, 
+                "bank_statement": doc_w_category
+                }
+        else:
+            response = {
+                "status": 400,
+                "job_id": job_id, 
+                "user_id": user_id, 
+                "bank_statement": {}
+                }
+        return json.dumps(response)
     elif request.method == 'POST':
         user_id = request.args.get('user_id', None)
         institution_name = request.args.get('institution_name', None)
         file_type = request.args.get('file_type', None)
         bank_statement = request.args.get('bank_statement', None)
-        # data = request.get_json()
-        # print(data)
+        doc = parse_statement(institution_name, file_type, bank_statement)
+        
         response = {"status": 200}
         return response

@@ -254,3 +254,25 @@ def update_gsheet(payload):
         return check_payload_dict
     else:
         return check_payload_dict
+
+def bulk_expense_tracker(doc, nlp, narration, labels, google_api_key, search_engine_id):
+    """
+    This function will get the category for each narration
+    and aggregate any narration rules
+    Input:
+    doc = [{"narration": narration, ..}, {}, ..]
+    Reponse:
+    doc_w_category = [{"narration": narration, "category": category, ..}, {}, ..]
+    """
+    #TODO: Refactor to expense_tracker class
+    #TODO: Aggregate in narration rules
+    #TODO: Save expense_tracker output to narration algo database
+    doc_w_category = []
+    for narration_dict in doc:
+        narration_dict_w_category = narration_dict
+        narration = narration_dict['narration']
+        response = expense_tracker(nlp, narration, labels, google_api_key, search_engine_id)
+        narration_dict_w_category['category_name'] = response['label']
+        doc_w_category.append(narration_dict_w_category)
+    return doc_w_category
+
