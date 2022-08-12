@@ -47,7 +47,7 @@ def parse_bank_statement():
         bank_statement = request.args.get('bank_statement', None)
         doc = parse_statement(institution_name, file_type, bank_statement)
         if bool(doc):
-            doc_w_category = bulk_expense_tracker(doc, nlp, narration, labels, google_api_key, search_engine_id)
+            doc_w_category = bulk_expense_tracker(doc, nlp, labels, google_api_key, search_engine_id)
             response = {
                 "status": 200,
                 "job_id": job_id, 

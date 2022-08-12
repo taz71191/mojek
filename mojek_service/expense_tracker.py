@@ -255,7 +255,7 @@ def update_gsheet(payload):
     else:
         return check_payload_dict
 
-def bulk_expense_tracker(doc, nlp, narration, labels, google_api_key, search_engine_id):
+def bulk_expense_tracker(doc, nlp, labels, google_api_key, search_engine_id):
     """
     This function will get the category for each narration
     and aggregate any narration rules
