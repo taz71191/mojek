@@ -18,8 +18,8 @@ class file_types(Enum):
 
 def get_narration_dict(date, narration, amount, transaction_type, closing_balance,institution_name):
     return {
-        "institution_name": institution_name,
-        "transaction_date": date,
+        "institution_name": str(institution_name.value),
+        "transaction_date": date.strftime("%d/%m/%Y, %H:%M:%S"),
         "narration": narration,
         "amount": amount,
         "transaction_type": transaction_type,
@@ -30,7 +30,8 @@ def get_narration_dict(date, narration, amount, transaction_type, closing_balanc
         "hide_budget": None,
         "mark_as_duplicate": None,
         "image": "",
-        "image_note":""
+        "image_note":"",
+        "payment_mode": "UPI" #TODO: get payment_model NEFT, UPI etc.
         }
 
 # parse Kotak bank PDF statement

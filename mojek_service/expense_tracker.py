@@ -272,7 +272,16 @@ def bulk_expense_tracker(doc, nlp, labels, google_api_key, search_engine_id):
         narration_dict_w_category = narration_dict
         narration = narration_dict['narration']
         response = expense_tracker(nlp, narration, labels, google_api_key, search_engine_id)
-        narration_dict_w_category['category_name'] = response['label']
+        if response == None:
+            narration_dict_w_category['category_name'] = "Uncategorized"
+        else:
+            try:
+                narration_dict_w_category['category_name'] = response.get('label',"Uncategorized")
+            except Exception as e:
+                print(e)
+                type(response)
+                print(response)
+                continue
         doc_w_category.append(narration_dict_w_category)
     return doc_w_category
 
