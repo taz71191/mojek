@@ -23,7 +23,7 @@ def get_narration_dict(date, narration, amount, transaction_type, closing_balanc
         "narration": narration,
         "amount": amount,
         "transaction_type": transaction_type,
-        "closing_balance": closing_balance,
+        "closing_balance": float(closing_balance.replace(",","")),
         "apply_all": None,
         "comment": "",
         "mark_as_transfer": None,
