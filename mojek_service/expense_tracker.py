@@ -279,9 +279,8 @@ def bulk_expense_tracker(doc, nlp, labels, google_api_key, search_engine_id):
                 narration_dict_w_category['category_name'] = response.get('label',"Uncategorized")
             except Exception as e:
                 print(e)
-                type(response)
                 print(response)
-                continue
+                narration_dict_w_category['category_name'] = "Uncategorized"
         doc_w_category.append(narration_dict_w_category)
     return doc_w_category
 
