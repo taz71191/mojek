@@ -150,7 +150,7 @@ def google_search_snippet(narration, google_api_key=google_api_key, search_engin
     url = f"https://www.googleapis.com/customsearch/v1?key={google_api_key}&cx={search_engine_id}&q={narration}&start={start}"
     data = requests.get(url).json()
     if 'error' in data.keys():
-        return f"search_engine_id: {search_engine_id} google_api_key: {google_api_key} Error: Can't connect to Google Search API"
+        return f"search_engine_id: {search_engine_id} google_api_key: {google_api_key} narration: {narration} Error: Can't connect to Google Search API"
     if 'items' in data.keys():
         for item in data['items']:
             if 'snippet' not in item.keys():
@@ -177,7 +177,7 @@ def extract_google_query(nlp, narration, google_api_key=google_api_key, search_e
     url = f"https://www.googleapis.com/customsearch/v1?key={google_api_key}&cx={search_engine_id}&q={mod_string}&start={start}"
     data = requests.get(url).json()
     if 'error' in data.keys():
-        return f"search_engine_id: {search_engine_id} google_api_key: {google_api_key} Error: Can't connect to Google Search API"
+        return f"search_engine_id: {search_engine_id} google_api_key: {google_api_key} narration {narration} Error: Can't connect to Google Search API"
     if 'items' in data.keys():
         for item in data['items']:
             if 'snippet' not in item.keys():
