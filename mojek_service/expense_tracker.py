@@ -176,8 +176,10 @@ def extract_google_query(nlp, narration, google_api_key=google_api_key, search_e
     start = (page - 1) * 10 + 1
     url = f"https://www.googleapis.com/customsearch/v1?key={google_api_key}&cx={search_engine_id}&q={mod_string}&start={start}"
     data = requests.get(url).json()
+    #TODO: remove (only for test)
+    return {"label": 'Uncategorized', "from_google": True, "snippet": "", "keyword": ""}
     if 'error' in data.keys():
-        return f"search_engine_id: {search_engine_id} google_api_key: {google_api_key} narration {narration} Error: Can't connect to Google Search API"
+        return {"label": 'Uncategorized', "from_google": True, "snippet": "", "keyword": ""}
     if 'items' in data.keys():
         for item in data['items']:
             if 'snippet' not in item.keys():
