@@ -12,9 +12,10 @@ import pdb
 nlp = spacy.load("./mojek_pipeline")
 
 
-narration = input("ENTER")
+narration = input("ENTER INPUT")
 response = expense_tracker(nlp, narration, labels, google_api_key, search_engine_id)
 
 label = response["label"]
+print(label)
 
 

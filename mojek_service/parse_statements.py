@@ -16,23 +16,27 @@ class file_types(Enum):
     excel = 'excel'
     csv = 'csv'
 
-def get_narration_dict(date, narration, amount, transaction_type, closing_balance,institution_name):
+def get_narration_dict(date, narration, amount, transaction_type, closing_balance,institution_name, censored_acc_number="", account_type="Savings"):
     return {
         "institution_name": str(institution_name.value),
-        "transaction_date": date.strftime("%d/%m/%Y, %H:%M:%S"),
+        "transaction_date": date.strftime("%Y/%m/%d, %H:%M:%S"),
         "narration": narration,
         "amount": amount,
         "transaction_type": transaction_type,
         "closing_balance": float(closing_balance.replace(",","")),
-        "apply_all": None,
+        "apply_all": False,
         "comment": "",
-        "mark_as_transfer": None,
-        "hide_budget": None,
-        "mark_as_duplicate": None,
+        "mark_as_transfer": False,
+        "hide_budget": False,
+        "mark_as_duplicate": False,
         "image": "",
         "image_note":"",
+        "account_info": str(institution_name.value) + " - " + account_type + " - " + censored_acc_number,
         "payment_mode": "UPI" #TODO: get payment_model NEFT, UPI etc.
         }
+
+def get_censored_acc_number(account_number):
+    return 'X'*(len(account_number) - 4) + account_number[-4:]
 
 # parse Kotak bank PDF statement
 def parse_kotak_pdf(pdf):
@@ -45,6 +49,13 @@ def parse_kotak_pdf(pdf):
         for page_number in range(pdfReader.numPages):
             pageObj = pdfReader.getPage(page_number)
             text = pageObj.extractText()
+            if page_number == 1:
+                regex = re.compile('Account # [0-9]{10}')
+                acc_number_regex = regex.search(text)
+                account_number = text[acc_number_regex.start(): acc_number_regex.end()][-10:]
+                censored_acc_number = get_censored_acc_number(account_number)
+                account_type = text[acc_number_regex.end():].split('\n')[0]
+
             #     Matches "/n748 " [\\n] = /n  \d{1,5} = atleast 1 but no more than 5 [\\s] = blank space
             regex = re.compile('\\n\d{1,5}\\s')
             text = regex.split(text)
@@ -73,7 +84,7 @@ def parse_kotak_pdf(pdf):
                     transaction_type = 'Expense'
                 narration = sentence[20:r.start()].replace('\n',"")
 
-                doc.append(get_narration_dict(date, narration, amount, transaction_type, closing_balance,institution_name))
+                doc.append(get_narration_dict(date, narration, amount, transaction_type, closing_balance,institution_name, censored_acc_number, account_type))
     return doc
 
 def parse_hdfc_pdf(pdf):
@@ -152,12 +163,17 @@ def parse_hdfc_spreadsheet(excel, file_type):
         doc.append(get_narration_dict(date, narration, amount, transaction_type, closing_balance, institution_name))
     return doc
 
-def parse_kotak_spreadsheet(csv, file_type):
+def parse_kotak_spreadsheet(file_name, file_type):
     institution_name = institutions.KOTAK
     if file_type == 'csv':
-        df = pd.read_csv(csv, skiprows=[i for i in range(12)]).iloc[:,1:-1]
+        df = pd.read_csv(file_name, skiprows=[i for i in range(12)]).iloc[:,1:-1]
+        with open(file_name) as f:
+            text = ''.join(f.readlines())
+            regex = re.compile('Account No.,[0-9]{10}')
+            account_number = text[regex.search(text).start(): regex.search(text).end()][12:]
+            censored_acc_number = get_censored_acc_number(account_number)
     elif file_type == 'excel':
-        df = pd.read_excel(csv, skiprows=[i for i in range(12)]).iloc[:,1:-1]
+        df = pd.read_excel(file_name, skiprows=[i for i in range(12)]).iloc[:,1:-1]
     df.columns = ['date','value_date','narration','ref_no','amount','dr_or_cr','closing_balance']
     #Drop NA rows at the bottom
     df = df.iloc[: df[df.value_date.isna()].index[0]]
@@ -177,7 +193,7 @@ def parse_kotak_spreadsheet(csv, file_type):
             amount = -amount
             transaction_type = 'Expense'
         closing_balance = row.closing_balance
-        doc.append(get_narration_dict(date, narration, amount, transaction_type, closing_balance, institution_name))
+        doc.append(get_narration_dict(date, narration, amount, transaction_type, closing_balance, institution_name, censored_acc_number))
     return doc
 
 
@@ -223,7 +239,7 @@ def parse_statement(institution_name, file_type, bank_statement):
             if file_type == file_types.PDF.value:
                 doc = parse_hdfc_pdf(bank_statement)
             else:
-                doc = parse_kotak_spreadsheet(bank_statement, file_type)
+                doc = parse_hdfc_spreadsheet(bank_statement, file_type)
     except Exception as e:
         if os.path.exists(bank_statement):
             os.remove(bank_statement)

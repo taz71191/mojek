@@ -142,7 +142,7 @@ def return_label(matcher, narration, nlp, debug=False):
     if len(matches) > 0:
         return nlp.vocab.strings[matches[0][0]]
     else:
-        return "No match"
+        return "Uncategorized"
 
 def google_search_snippet(narration, google_api_key=google_api_key, search_engine_id=search_engine_id):
     page = 1
@@ -195,9 +195,9 @@ def extract_google_query(nlp, narration, google_api_key=google_api_key, search_e
                         return {"label": ents.label_, "from_google": True, "snippet": snippet, "keyword": keyword}
             else:
                 continue
-        return {"label": 'No match', "from_google": True, "snippet": "", "keyword": ""}
+        return {"label": 'Uncategorized', "from_google": True, "snippet": "", "keyword": ""}
     else:
-        {"label": 'No match', "from_google": True, "snippet": "", "keyword": ""}
+        {"label": 'Uncategorized', "from_google": True, "snippet": "", "keyword": ""}
 
 def expense_tracker(nlp, narration, labels, google_api_key, search_engine_id):
     doc1 = nlp(narration.lower())
