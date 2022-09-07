@@ -5,7 +5,7 @@ from spacy.matcher import Matcher
 from spacy.tokens import Span
 import re
 import requests
-from mojek_service.labels import labels
+from mojek_service.labels import labels_expenses, labels_income
 from mojek_service.config import *
 from google.oauth2 import service_account
 from shillelagh.backends.apsw.db import connect
@@ -158,7 +158,7 @@ def google_search_snippet(narration, google_api_key=google_api_key, search_engin
             snippet = item['snippet']
     return snippet
 
-def extract_google_query(nlp, narration, google_api_key=google_api_key, search_engine_id=search_engine_id):
+def extract_google_query(nlp, narration, labels, google_api_key=google_api_key, search_engine_id=search_engine_id):
     query = narration
     remov_pcd = r'[^PCD/]' #Personal Certificate of Deposit
     pattern = r'[0-9:/]'
@@ -177,9 +177,9 @@ def extract_google_query(nlp, narration, google_api_key=google_api_key, search_e
     url = f"https://www.googleapis.com/customsearch/v1?key={google_api_key}&cx={search_engine_id}&q={mod_string}&start={start}"
     data = requests.get(url).json()
     #TODO: remove (only for test)
-    return {"label": 'Uncategorized', "from_google": True, "snippet": "", "keyword": ""}
+    # return {"label": 'Uncategorized', "from_google": True, "snippet": "", "keyword": ""}
     if 'error' in data.keys():
-        return {"label": 'Uncategorized', "from_google": True, "snippet": "", "keyword": ""}
+        return {"label": 'Uncategorised', "from_google": True, "snippet": "", "keyword": ""}
     if 'items' in data.keys():
         for item in data['items']:
             if 'snippet' not in item.keys():
@@ -201,7 +201,31 @@ def extract_google_query(nlp, narration, google_api_key=google_api_key, search_e
     else:
         {"label": 'Uncategorized', "from_google": True, "snippet": "", "keyword": ""}
 
-def expense_tracker(nlp, narration, labels, google_api_key, search_engine_id):
+def get_keyword_from_narration(narration_dict_w_category):
+    institution_name = narration_dict_w_category["institution_name"]
+    narration = narration_dict_w_category["narration"]
+    if institution_name == "Kotak":
+        keyword = ""
+        while keyword == "":
+            for payment_type in ['UPI','ATW','ATL','OS','IB','MB','PCD','PB','IMPS','NEFT']:
+                if payment_type == 'PCD':
+                    regex = re.compile(f'^{payment_type}/[0-9]+/')
+                else:
+                    regex = re.compile(f'^{payment_type}/')
+                if regex.match(narration):
+                    search = regex.search(narration)
+                    keyword = narration[search.end():].split("/")[0]
+                    print("keyword:", keyword, "narration:", narration)
+        if keyword == "":
+            return narration
+        else:
+            return keyword
+
+
+def expense_tracker(nlp, labels, google_api_key, search_engine_id, narration_dict_w_category):
+    # Filter keyword from narration (by institution name)
+    # narration = get_keyword_from_narration(narration_dict_w_category)
+    narration = narration_dict_w_category["narration"]
     doc1 = nlp(narration.lower())
     if len(doc1.ents) >= 1:
         for doc in doc1.ents:
@@ -212,10 +236,10 @@ def expense_tracker(nlp, narration, labels, google_api_key, search_engine_id):
                 return {"label": label, "from_google": False, "snippet": "", "keyword": keyword}
             else:
                 continue
-        response = extract_google_query(nlp, narration, google_api_key, search_engine_id)
+        response = extract_google_query(nlp, narration, labels, google_api_key, search_engine_id)
         return response
     else:
-        label = extract_google_query(nlp, narration, google_api_key, search_engine_id)
+        label = extract_google_query(nlp, narration, labels, google_api_key, search_engine_id)
         return label
 
 def check_payload(payload):
@@ -257,7 +281,7 @@ def update_gsheet(payload):
     else:
         return check_payload_dict
 
-def bulk_expense_tracker(doc, nlp, labels, google_api_key, search_engine_id):
+def bulk_expense_tracker(doc, nlp, nlp_income, google_api_key, search_engine_id):
     """
     This function will get the category for each narration
     and aggregate any narration rules
@@ -267,13 +291,16 @@ def bulk_expense_tracker(doc, nlp, labels, google_api_key, search_engine_id):
     doc_w_category = [{"narration": narration, "category": category, ..}, {}, ..]
     """
     #TODO: Refactor to expense_tracker class
-    #TODO: Aggregate in narration rules
-    #TODO: Save expense_tracker output to narration algo database
+    #TODO: Add Self Transfer Rule (get user name)
     doc_w_category = []
     for narration_dict in doc:
         narration_dict_w_category = narration_dict
         narration = narration_dict['narration']
-        response = expense_tracker(nlp, narration, labels, google_api_key, search_engine_id)
+        transaction_type = narration_dict['transaction_type']
+        if transaction_type == 'Expense':
+            response = expense_tracker(nlp, labels_expenses, google_api_key, search_engine_id, narration_dict_w_category)
+        else:
+            response = expense_tracker(nlp_income, labels_income, google_api_key, search_engine_id, narration_dict_w_category)
         if response == None:
             narration_dict_w_category['category_name'] = "Uncategorized"
         else:
@@ -285,4 +312,9 @@ def bulk_expense_tracker(doc, nlp, labels, google_api_key, search_engine_id):
                 narration_dict_w_category['category_name'] = "Uncategorized"
         doc_w_category.append(narration_dict_w_category)
     return doc_w_category
+
+def income_tracker(nlp):
+    nlp.remove_pipe('entity_ruler')
+    nlp.add_pipe("entity_ruler").from_disk("mojek_service/patterns.jsonl")
+    return nlp
 

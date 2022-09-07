@@ -1,9 +1,8 @@
-from mojek_service.expense_tracker import expense_tracker, update_gsheet, bulk_expense_tracker
+from mojek_service.expense_tracker import expense_tracker, update_gsheet, bulk_expense_tracker, income_tracker
 from mojek_service.config import *
 from flask import Flask
 from flask import request
 from flask_cors import CORS
-from mojek_service.labels import labels
 from mojek_service.config import *
 from mojek_service.parse_statements import parse_statement
 import os
@@ -14,6 +13,9 @@ import json
 # https://stackoverflow.com/questions/57922676/exposing-an-endpoint-for-a-python-program
 
 nlp = spacy.load("./mojek_pipeline")
+nlp_income = income_tracker(spacy.load("./mojek_pipeline"))
+nlp.disable_pipe('ner')
+nlp_income.disable_pipe('ner')
 
 app = Flask(__name__)
 cors = CORS(app)
@@ -28,7 +30,7 @@ def hello():
 def get_expense_category():
     if request.method == 'GET':
         narration = request.args.get('narration', None)
-        response = expense_tracker(nlp, narration, labels, google_api_key, search_engine_id)
+        response = expense_tracker(nlp, narration, google_api_key, search_engine_id)
         response["narration"] = narration
         return response
     elif request.method == 'POST':
@@ -47,7 +49,7 @@ def parse_bank_statement():
         bank_statement = request.args.get('bank_statement', None)
         doc = parse_statement(institution_name, file_type, bank_statement)
         if bool(doc):
-            doc_w_category = bulk_expense_tracker(doc, nlp, labels, google_api_key, search_engine_id)
+            doc_w_category = bulk_expense_tracker(doc, nlp, nlp_income, google_api_key, search_engine_id)
             response = {
                 "status": 200,
                 "job_id": job_id, 

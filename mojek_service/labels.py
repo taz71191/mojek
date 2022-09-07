@@ -1,22 +1,38 @@
-
+# EMI
+# Investments
+# Household
+# General
+# Commute
+# Online shopping
 # Entertainment
 # Travel
-# Local travel
 # Work expenses
 # ATM
-# Restaurants & Bars
-# Fashion
+# Food & beverages
+# Fashion & Apparel
 # Bills & Utilities
 # Groceries
-# Health & Fitness
-# Doctor & Pharmacy
-# Study expense
+# Health & Nutrition
+# Medical
+# Education
+# Uncategorised
+# Money transfer
+# Self transfer
 
-labels = ['EMI', 'Investments', 'Household',
- 'General', 'Fuel','Online shopping', 'Entertainment',
- 'Travel', 'Local travel','Work expenses','ATM','Restaurants & Bars',
- 'Fashion','Bills & Utilities','Groceries','Health & Fitness',
- 'Doctor & Pharmacy','Study expense'
+labels_expenses = ['EMI', 'Investments', 'Household',
+ 'General', 'Commute','Online shopping', 'Entertainment',
+ 'Travel', 'Work Expenses','ATM','Food & beverages',
+ 'Fashion & Apparel','Bills & Utilities','Groceries','Health & Nutrition',
+ 'Medical','Education','Money transfer','Self transfer'
+ ]
+
+
+# Salary
+# Dividends
+# Money transfer - Gift
+# Passive income
+
+labels_income = ['Salary', 'Dividends', 'Money Trasfer - Gift', 'Passive Income'
  ]
 
 # labels = ['Credit Card Payment', 'Equity', 'Crypto', 'Savings',

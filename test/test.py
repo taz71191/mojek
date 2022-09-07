@@ -1,7 +1,6 @@
 from mojek_service.expense_tracker import expense_tracker, update_gsheet
 from mojek_service.config import *
 from mojek_service.labels import labels
-from mojek_service.config import *
 import os
 import spacy
 import pandas as pd

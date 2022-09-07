@@ -1,0 +1,4 @@
+{"label":"Salary","pattern":[{"TEXT":{"REGEX":"imps/[0-9]+"}}]}
+{"label":"Money Transfer - Gift","pattern":[{"TEXT":{"REGEX":"upi/"}}]}
+{"label":"Passive Income","pattern":[{"TEXT":{"REGEX":"proceeds"}}]}
+{"label":"Dividends","pattern":[{"TEXT":{"REGEX":"zerodha"}}]}
