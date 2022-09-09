@@ -107,7 +107,7 @@ pyarrow==9.0.0
 pyasn1==0.4.8
 pyasn1-modules==0.2.8
 pycparser==2.21
-pydantic==1.9.1
+pydantic
 pydeck==0.7.1
 Pygments==2.12.0
 Pympler==1.0.1
@@ -143,7 +143,7 @@ srsly==2.4.4
 stack-data==0.3.0
 streamlit==1.11.1
 terminado==0.15.0
-thinc==8.1.0
+thinc
 threadpoolctl==3.1.0
 tinycss2==1.1.1
 toml==0.10.2
