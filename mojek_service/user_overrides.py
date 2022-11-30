@@ -1,7 +1,7 @@
 import re
 from pymongo import MongoClient
 from bson.objectid import ObjectId
-from config import MONGODB_URL
+from mojek_service.config import MONGODB_URL
 
 def connect(connect_str):
     try:
