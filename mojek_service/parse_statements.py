@@ -23,7 +23,7 @@ def get_narration_dict(date, narration, amount, transaction_type, closing_balanc
         "narration": narration,
         "amount": amount,
         "transaction_type": transaction_type,
-        "closing_balance": float(closing_balance.replace(",","")),
+        "closing_balance": float(closing_balance.replace(",","")) if type(closing_balance) == str else closing_balance,
         "apply_all": False,
         "comment": "",
         "mark_as_transfer": False,
@@ -38,53 +38,85 @@ def get_narration_dict(date, narration, amount, transaction_type, closing_balanc
 def get_censored_acc_number(account_number):
     return 'X'*(len(account_number) - 4) + account_number[-4:]
 
+def kotak_format_1(pdfReader):
+    """
+    Aman Maroo/ Aaditya PDF
+    """
+    institution_name = institutions.KOTAK
+    doc = []
+        #Loop through each page and parse narrations
+    for page_number in range(pdfReader.numPages):
+        pageObj = pdfReader.getPage(page_number)
+        text = pageObj.extractText()
+        if page_number == 0:
+            regex = re.compile('Account # [0-9]{10}')
+            acc_number_regex = regex.search(text)
+            account_number = text[acc_number_regex.start(): acc_number_regex.end()][-10:]
+            censored_acc_number = get_censored_acc_number(account_number)
+            account_type = text[acc_number_regex.end():].split('\n')[0].strip()
+
+        #     Matches "/n748 " [\\n] = /n  \d{1,5} = atleast 1 but no more than 5 [\\s] = blank space
+        regex = re.compile('\\n\d{1,5}\\s')
+        text = regex.split(text)
+        #     Need to drop the first one and trim the last one
+        if page_number == 0:
+            text = text[2:]
+        else:
+            text = text[1:]
+        last_element = text.pop()
+        if last_element == '':
+            last_element = text.pop()
+        pattern = re.compile('\\nOPENING')
+        r = pattern.search(last_element)
+        text.append(last_element[: r.start()])
+        # page_text = []
+        
+        for idx, sentence in enumerate(text):
+            date = datetime.datetime.strptime(sentence[:20].replace('\n', ' '), '%d %b %Y %I:%M %p') #doc2
+            closing_balance = float(sentence.split(' ')[-1].replace(',',''))
+            amount_regex = re.compile('[+-][0-9,]+\.[0-9]{2}')
+            r = amount_regex.search(sentence)
+            amount = float(sentence[r.start():r.end()].replace('+','').replace(',',''))
+            if amount >= 0:
+                transaction_type = 'Income'
+            else:
+                transaction_type = 'Expense'
+            narration = sentence[20:r.start()].replace('\n',"")
+
+            doc.append(get_narration_dict(date, narration, amount, transaction_type, closing_balance,institution_name, censored_acc_number, account_type))
+
+
+def kotak_format_2(pdfReader):
+    """
+    Ikhlaque PDF
+    """
+    doc = []
+    institution_name = institutions.KOTAK
+    #Loop through each page and parse narrations
+    for page_number in range(pdfReader.numPages):
+        pageObj = pdfReader.getPage(page_number)
+        text = pageObj.extractText()
+        if page_number == 1:
+            regex = re.compile('[0-9]{12}\n')
+            acc_number_regex = regex.search(text)
+            account_number = text[acc_number_regex.start(): acc_number_regex.end()][:-1]
+            censored_acc_number = get_censored_acc_number(account_number)
+            account_type = "Savings" #TODO: No indication in statement
+    return "Unsuported format, please check in later"
+
 # parse Kotak bank PDF statement
 def parse_kotak_pdf(pdf):
-    institution_name = institutions.KOTAK
     # creating a pdf file object
     with open(pdf, 'rb') as pdfFileObj:
         pdfReader = PdfFileReader(pdfFileObj)
-        doc = []
-        #Loop through each page and parse narrations
-        for page_number in range(pdfReader.numPages):
-            pageObj = pdfReader.getPage(page_number)
-            text = pageObj.extractText()
-            if page_number == 1:
-                regex = re.compile('Account # [0-9]{10}')
-                acc_number_regex = regex.search(text)
-                account_number = text[acc_number_regex.start(): acc_number_regex.end()][-10:]
-                censored_acc_number = get_censored_acc_number(account_number)
-                account_type = text[acc_number_regex.end():].split('\n')[0]
-
-            #     Matches "/n748 " [\\n] = /n  \d{1,5} = atleast 1 but no more than 5 [\\s] = blank space
-            regex = re.compile('\\n\d{1,5}\\s')
-            text = regex.split(text)
-            #     Need to drop the first one and trim the last one
-            if page_number == 0:
-                text = text[2:]
-            else:
-                text = text[1:]
-            last_element = text.pop()
-            if last_element == '':
-                last_element = text.pop()
-            pattern = re.compile('\\nOPENING')
-            r = pattern.search(last_element)
-            text.append(last_element[: r.start()])
-            # page_text = []
-            
-            for idx, sentence in enumerate(text):
-                date = datetime.datetime.strptime(sentence[:20].replace('\n', ' '), '%d %b %Y %I:%M %p') #doc2
-                closing_balance = float(sentence.split(' ')[-1].replace(',',''))
-                amount_regex = re.compile('[+-][0-9,]+\.[0-9]{2}')
-                r = amount_regex.search(sentence)
-                amount = float(sentence[r.start():r.end()].replace('+','').replace(',',''))
-                if amount >= 0:
-                    transaction_type = 'Income'
-                else:
-                    transaction_type = 'Expense'
-                narration = sentence[20:r.start()].replace('\n',"")
-
-                doc.append(get_narration_dict(date, narration, amount, transaction_type, closing_balance,institution_name, censored_acc_number, account_type))
+        pageObj = pdfReader.getPage(0)
+        text = pageObj.extractText()
+        if 'Account StatementAccount #' in text[:30]:
+            doc = kotak_format_1(pdfReader)
+        if 'Account No.' in text[:30]:
+            doc = kotak_format_2(pdfReader)
+        else:
+            doc = "Unsuported format, please check in later"
     return doc
 
 def parse_hdfc_pdf(pdf):
@@ -241,8 +273,8 @@ def parse_statement(institution_name, file_type, bank_statement):
             else:
                 doc = parse_hdfc_spreadsheet(bank_statement, file_type)
     except Exception as e:
-        if os.path.exists(bank_statement):
-            os.remove(bank_statement)
+        with open('failed_statements.txt',"a+") as f:
+            f.write(bank_statement)
         return {}
     # TODO: delete_file
     if os.path.exists(bank_statement):

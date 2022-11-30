@@ -5,6 +5,7 @@ from flask import request
 from flask_cors import CORS
 from mojek_service.config import *
 from mojek_service.parse_statements import parse_statement
+from mojek_service.user_overrides import apply_overrides
 import os
 import spacy
 import json
@@ -49,13 +50,23 @@ def parse_bank_statement():
         bank_statement = request.args.get('bank_statement', None)
         doc = parse_statement(institution_name, file_type, bank_statement)
         if bool(doc):
-            doc_w_category = bulk_expense_tracker(doc, nlp, nlp_income, google_api_key, search_engine_id)
-            response = {
-                "status": 200,
-                "job_id": job_id, 
-                "user_id": user_id, 
-                "bank_statement": doc_w_category
+            if type(doc) == str:
+                response = {
+                    "status": 400,
+                    "job_id": job_id, 
+                    "user_id": user_id, 
+                    "bank_statement": {},
+                    "error": doc
                 }
+            else:
+                doc_w_category = bulk_expense_tracker(doc, nlp, nlp_income, google_api_key, search_engine_id)
+                doc_w_category = apply_overrides(user_id, doc_w_category)
+                response = {
+                    "status": 200,
+                    "job_id": job_id, 
+                    "user_id": user_id, 
+                    "bank_statement": doc_w_category
+                    }
         else:
             response = {
                 "status": 400,
